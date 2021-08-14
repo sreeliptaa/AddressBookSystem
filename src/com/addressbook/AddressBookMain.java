@@ -2,7 +2,7 @@ package com.addressbook;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * Purpose - Edit a contact in Address Book System
+ * Purpose - Delete a contact in Address Book System
  * @author Sreelipta
  * @since 2021-08-14
  */
@@ -91,6 +91,23 @@ public class AddressBookMain {
         }
 
     }
+    /**
+     * This method is for delete the contact details
+     */
+    public void deleteDetails() {
+        System.out.println("Confirm the first name of the person to delete contact");
+        String confirmName = sc.next();
+        for (int i = 0; i < arrayDetails.size(); i++) {
+
+            if (arrayDetails.get(i).getFirstName().equals(confirmName)) {
+                arrayDetails.remove(i);
+                System.out.println("List After removing");
+                System.out.println(arrayDetails);
+            } else {
+                System.out.println("Enter valid first name");
+            }
+        }
+    }
 
     public static void main(String[] args) {
         AddressBookMain details = new AddressBookMain();
@@ -98,8 +115,8 @@ public class AddressBookMain {
         int i = 0;
         while (i == 0) {
             System.out.println("Welcome to Address Book Program");
-            System.out.println("If you want to add or edit then do like this ");
-            System.out.println("1.Add details.\n2.Edit details.");
+            System.out.println("You have to choose from these three options ");
+            System.out.println("1.Add details.\n2.Edit details.\n3.Delete Details.");
             int choose = sc.nextInt();
             switch (choose) {
                 case 1:
@@ -108,12 +125,18 @@ public class AddressBookMain {
                 case 2:
                     details.editDetails();
                     break;
+                case 3:
+                    details.deleteDetails();
+                    break;
                 default:
                     i = 1;
-                    System.out.println("Wrong option");
+                    System.out.println("You choosed a Wrong option");
                     break;
             }
         }
 
     }
 }
+
+
+
