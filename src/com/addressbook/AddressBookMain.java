@@ -1,12 +1,56 @@
 package com.addressbook;
-
+import java.util.ArrayList;
+import java.util.Scanner;
 /**
- * Purpose - Create an Address Book System
+ * Purpose - Add a contact in Address Book System
  * @author Sreelipta
  * @since 2021-08-14
  */
 
-class Contact {
+public class AddressBookMain {
+    ArrayList<Contacts> arrayDetails = new ArrayList<Contacts>();
+    Scanner sc = new Scanner(System.in);
+
+    /**
+     * This method is used to add details to address book
+     */
+    public void addDetails() {
+        Contacts info = new Contacts();
+        System.out.println("Enter the first name-");
+        info.setFirstName(sc.nextLine());
+        System.out.println("Enter the last name-");
+        info.setLastName(sc.nextLine());
+        System.out.println("Enter the address-");
+        info.setAddress(sc.nextLine());
+        System.out.println("Enter the city-");
+        info.setCity(sc.nextLine());
+        System.out.println("Enter the state-");
+        info.setState(sc.nextLine());
+        System.out.println("Enter the email-");
+        info.setEmail(sc.nextLine());
+        System.out.println("Enter the zip code-");
+        info.setZip(sc.nextInt());
+        System.out.println("Enter the phone number-");
+        info.setPhoneNumber(sc.nextLong());
+        arrayDetails.add(info);
+        sc.close();
+    }
+
+    /**
+     * This method displays the added contact
+     */
+    public void display() {
+        System.out.println(arrayDetails);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Welcome to Address Book Program");
+        AddressBookMain details = new AddressBookMain();
+        details.addDetails();
+        details.display();
+    }
+}
+class Contacts {
 
     private String firstName;
     private String lastName;
@@ -16,17 +60,6 @@ class Contact {
     private String email;
     private int zip;
     private long phoneNumber;
-
-    public Contact(String firstName, String lastName, String address, String city, String state, String email, int zip, long phoneNumber ){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.email = email;
-        this.zip = zip;
-        this.phoneNumber = phoneNumber;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -91,16 +124,13 @@ class Contact {
     public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-}
 
-public class AddressBookMain {
-    public static void main(String[] args) {
-        Contact details = new Contact("Sreelipta", "Sahoo", "CDA", "Cuttack", "Odisha", "sree@gmail.com", 753014, 1234567891);
-        System.out.println("WELCOME TO ADDRESS BOOK PROGRAM");
-        System.out.println("The address details you have created as: FirstName-" + details.getFirstName() +"\n"+"LastName-"
-                + details.getLastName()+"\n" + " Address-" + details.getAddress()+"\n" + " City-" + details.getCity()+"\n"
-                + " State-" + details.getState()+"\n" + " Email-" + details.getEmail()+"\n" + " Zip-" + details.getZip()+"\n"
-                + " PhoneNumber-" + details.getPhoneNumber()+"\n");
+    public String toString() {
+        return ("First name: " + firstName +"\n"+" Last name: " + lastName +"\n" +" Address: " + address + "\n"+" city: " + city
+                +"\n"+ " state: " + state +"\n"+ " email: " + email +"\n" +" zip: " + zip +"\n"+ " phone number:" + phoneNumber +"\n" );
     }
 }
+
+
+
 
