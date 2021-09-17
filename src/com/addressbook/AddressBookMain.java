@@ -3,7 +3,7 @@ package com.addressbook;
 import java.util.*;
 
 /**
- * Purpose - Ability to ensure there is no Duplicate Entry of the same Person in a particular address book
+ * Purpose - Ability to view Persons by City or State
  * @author Sreelipta
  * @since 2021-09-17
  */
@@ -51,6 +51,10 @@ public class AddressBookMain {
                     System.out.println("Welcome to the search option:");
                     addressBook.searchByOptions();
                 case 5:
+                    System.out.println("Welcome to view By Option:");
+                    addressBook.viewByOption(addressBookMap);
+                    break;
+                case 6:
                     sc.close();// for closing the programme
                     return;
                 default:
