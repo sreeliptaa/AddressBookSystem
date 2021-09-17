@@ -57,6 +57,7 @@ class Contacts {
     public void setState(String state) {
         this.state = state;
     }
+    
 
     public String getEmail() {
         return email;
