@@ -1,11 +1,14 @@
 package com.addressbook;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
+
 /**
- * Purpose - Add multiple contact in Address Book System
+ * Purpose - Ability to ensure there is no Duplicate Entry of the same Person in a particular address book
+ *
  * @author Sreelipta
- * @since 2021-08-14
+ * @since 2021-09-17
  */
 
 public class AddressBookMain {
@@ -20,17 +23,17 @@ public class AddressBookMain {
     public void addDetails() {
         Contacts info = new Contacts();
         System.out.println("Enter the first name");
-        info.setFirstName(sc.nextLine());
+        info.setFirstName(sc.next());
         System.out.println("Enter the last name");
-        info.setLastName(sc.nextLine());
+        info.setLastName(sc.next());
         System.out.println("Enter the address");
-        info.setAddress(sc.nextLine());
+        info.setAddress(sc.next());
         System.out.println("Enter the city");
-        info.setCity(sc.nextLine());
+        info.setCity(sc.next());
         System.out.println("Enter the state");
-        info.setState(sc.nextLine());
+        info.setState(sc.next());
         System.out.println("Enter the email");
-        info.setEmail(sc.nextLine());
+        info.setEmail(sc.next());
         System.out.println("Enter the zip code");
         info.setZip(sc.nextInt());
         System.out.println("Enter the phone number");
@@ -39,23 +42,23 @@ public class AddressBookMain {
     }
 
     /**
-     * This method used for display the details
+     * This method is used to display the details
      */
 
-    public void display() {
+    public void displayDetails() {
         System.out.println(arrayDetails);
     }
 
     /**
-     * This method used for edit the details in address book
+     * This method is used to edit the details in address book
      */
     public void editDetails() {
         System.out.println("Confirm your first name to edit details: ");
-        String confirmName = sc.next();
+        String confirmName = sc.nextLine();
 
         for (int i = 0; i < arrayDetails.size(); i++) {
             if (arrayDetails.get(i).getFirstName().equals(confirmName)) {
-                System.out.println("Select any number form below to change: ");
+                System.out.println("Select form below to change: ");
                 System.out.println("\n1.First Name\n2.Last Name\n3.Address\n4.city\n5.State\n6.Zip\n7.Mobile number\n8.Email");
                 int edit = sc.nextInt();
 
@@ -99,7 +102,7 @@ public class AddressBookMain {
     }
 
     /**
-     * This method used for delete the contact details
+     * This method is used to delete the contact details
      */
     public void deleteDetails() {
         System.out.println("Confirm the first name of the person to delete contact");
@@ -116,14 +119,34 @@ public class AddressBookMain {
         }
     }
 
+
+    /**
+     * Method to check for duplicate entry before adding the person.
+     */
+    public void duplicateCheck(String firstName) {
+        for (int k = 0; k < arrayDetails.size(); k++) {
+            String contactName = arrayDetails.get(k).getFirstName();
+
+            if (firstName.equals(contactName)) {
+                System.out.println("This Person is Already Present");
+            } else {
+                System.out.println("You can Add this Person");
+                break;
+            }
+        }
+    }
+
+    /*
+     * Method to create multiple address book and editing it.
+     */
     public void createAddressBook() {
 
         while (true) {
-            System.out.println("Choose any no from bellow: ");
+            System.out.println("Choose what you want to do: ");
             System.out.println("1.Create new address book.\n2.Edit existing address book.\n3.Display all address books.\n4.exit");
             int choose = sc.nextInt();
 
-            if (choose == 4) {
+            if (choose == 6) {
                 System.out.println("Exited");
                 break;
             }
@@ -135,18 +158,18 @@ public class AddressBookMain {
 
                     // condition to check for uniqueness of address book.
                     if (hashmap.containsKey(address_name)) {
-                        System.out.println("This name already exits, enter different name");
+                        System.out.println("Adress book name exits, enter different name");
                         break;
                     }
 
                     ArrayList<Contacts> new_address_book = new ArrayList<>();
                     arrayDetails = new_address_book;
                     while (true) {
-                        System.out.println("Choose any no from bellow: ");
-                        System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact. \n4.Display Contact\n5.Exit");
+                        System.out.println("Choose what you want to do: ");
+                        System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact. \n4.Dipslay all contacts. \n5.Duplicate check.\n6.Exit");
                         int choose1 = sc.nextInt();
-                        if (choose1 == 4) {
-                            System.out.println("Invalid");
+                        if (choose1 == 6) {
+                            System.out.println("Exited");
                             break;
                         }
                         switch (choose1) {
@@ -160,8 +183,14 @@ public class AddressBookMain {
                                 details.deleteDetails();
                                 break;
                             case 4:
-                                details.display();
+                                details.displayDetails();
                                 break;
+                            case 5:
+                                System.out.println("Enter first name to check for duplicancy");
+                                String enteredName = sc.next();
+                                details.duplicateCheck(enteredName);
+                                break;
+
                             default:
                                 System.out.println("Choose valid option");
                                 break;
@@ -182,8 +211,8 @@ public class AddressBookMain {
                         arrayDetails = old_address_book;
                         arrayDetails = hashmap.get(address_name_old);
                         while (true) {
-                            System.out.println("Choose any no from bellow: ");
-                            System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact. \n4.Display contact.\n5.Exit");
+                            System.out.println("Choose what you want to do: ");
+                            System.out.println("1.Add details.\n2.Edit details.\n3.Delete contact. \n4.Display contact. \n5.Duplicate check. \n5.Exit");
                             int choose1 = sc.nextInt();
                             if (choose1 == 4) {
                                 System.out.println("Exited");
@@ -194,13 +223,19 @@ public class AddressBookMain {
                                     details.addDetails();
                                     break;
                                 case 2:
-                                    details.addDetails();
+                                    details.editDetails();
                                     break;
                                 case 3:
-                                    details.addDetails();
+                                    details.deleteDetails();
                                     break;
                                 case 4:
-                                    details.display();
+                                    details.displayDetails();
+                                    break;
+
+                                case 5:
+                                    System.out.println("Enter first name to check for duplicancy");
+                                    String enteredName = sc.next();
+                                    details.duplicateCheck(enteredName);
                                     break;
                                 default:
                                     System.out.println("Choose valid option");
