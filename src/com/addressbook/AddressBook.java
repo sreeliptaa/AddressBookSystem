@@ -282,7 +282,7 @@ public class AddressBook {
         sc.nextLine();
         switch (choice) {
             case 1:
-                AddressBook.sortBy(Contacts::getFirstName).forEach(System.out::println);
+               AddressBook.sortBy(Contacts::getFirstName).forEach(System.out::println);
                 break;
             case 2:
                 AddressBook.sortBy(Contacts::getLastName).forEach(System.out::println);
@@ -294,6 +294,9 @@ public class AddressBook {
                 AddressBook.sortBy(Contacts::getState).forEach(System.out::println);
                 break;
             case 5:
+                AddressBook.sortBy(Contacts::getZip).forEach(System.out::println);
+                break;
+            case 6:
                 return;
             default:
                 System.out.println("INVALID CHOICE!");
