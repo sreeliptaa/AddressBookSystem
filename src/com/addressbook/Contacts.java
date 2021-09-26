@@ -3,19 +3,18 @@ package com.addressbook;
 class Contacts {
 
     private String firstName, lastName, address, city, state, email;
-    private long zip;
-    private long phoneNumber;
+    private Long zip, phoneNumber;
 
-    public Contacts(String firstName, String lastName, String address, String city, String state, Long zip,
-                    Long phoneNumber, String email) {
+    public Contacts(String firstName, String lastName, String address, String city, String state, String email,
+                    Long zip, Long phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.city = city;
         this.state = state;
+        this.email = email;
         this.zip = zip;
         this.phoneNumber = phoneNumber;
-        this.email = email;
     }
 
     public String getFirstName() {
@@ -58,6 +57,22 @@ class Contacts {
         this.state = state;
     }
 
+    public Long getZip() {
+        return zip;
+    }
+
+    public void setZip(Long zip) {
+        this.zip = zip;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -66,24 +81,17 @@ class Contacts {
         this.email = email;
     }
 
-    public long getZip() {
-        return zip;
-    }
-
-    public void setZip(long zip) {
-        this.zip = zip;
-    }
-
-    public long getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(long phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
+    @Override
     public String toString() {
-        return ("First name: " + firstName + " Last name: " + lastName + " Address: " + address + " city: " + city
-                + " state: " + state + " email: " + email + " zip: " + zip + " phone number:" + phoneNumber + "");
+        return "Contacts{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", email='" + email + '\'' +
+                ", zip=" + zip +
+                ", phoneNumber=" + phoneNumber +
+                '}';
     }
 }
